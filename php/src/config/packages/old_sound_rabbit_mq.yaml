@@ -1,0 +1,10 @@
+old_sound_rabbit_mq:
+    connections:
+        default:
+            url: 'amqp://root:root@rabbitmq:5672'
+    producers:
+        # use 'old_sound_rabbit_mq.task_producer' service to send data.
+        task:
+            connection:       default
+            exchange_options: { name: 'task', type: direct }
+            queue_options:    { name: 'task' }
