@@ -1,0 +1,28 @@
+version: '3'
+services:
+  php:
+    build:
+      context: ./php
+      dockerfile: docker/Dockerfile
+    ports:
+      - 80:80
+    volumes:
+      - ./php/docker/supervisor.conf:/etc/supervisor/conf.d/supervisor.conf
+      - ./php/docker/nginx.conf:/etc/nginx/sites-enabled/nginx.conf
+      - ./php/logs:/var/www/logs
+      - ./php/src:/var/www/html
+
+  rabbitmq:
+    image: rabbitmq:3.7
+    environment:
+      RABBITMQ_DEFAULT_USER: root
+      RABBITMQ_DEFAULT_PASS: root
+
+  python:
+    build:
+      context: ./python
+      dockerfile: docker/Dockerfile
+    volumes:
+      - ./python/src:/src
+      - ./python/logs:/var/log
+      - ./python/docker/supervisor.conf:/etc/supervisor/conf.d/supervisor.conf
