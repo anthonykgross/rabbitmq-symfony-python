@@ -18,6 +18,10 @@ services:
       RABBITMQ_DEFAULT_USER: root
       RABBITMQ_DEFAULT_PASS: root
 
+  redis:
+    image: 'redis:5-alpine'
+    command: redis-server --requirepass fake_password
+
   python:
     build:
       context: ./python
