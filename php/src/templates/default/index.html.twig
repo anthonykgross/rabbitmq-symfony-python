@@ -4,4 +4,28 @@
 
 {% block body %}
 It works !
+<ul></ul>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            setInterval(refresh, 500);
+        });
+
+        function refresh() {
+            $.ajax({
+                url: "{{ path('redis_endpoint') }}"
+            }).done(function(data) {
+                $('ul').empty();
+
+                for (var i = 0; i < data.length; i++) {
+                    var title = data[i];
+                    var li = $('<li/>').html(title);
+                    $('ul').append(li);
+                }
+            });
+        }
+    </script>
 {% endblock %}
