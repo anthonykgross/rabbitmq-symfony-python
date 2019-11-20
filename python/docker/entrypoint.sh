@@ -13,8 +13,8 @@ tests() {
 
 run() {
     mkdir -p /var/log/supervisor
-#    supervisord -c /etc/supervisor/conf.d/supervisor.conf
-    tail -f
+    supervisord -c /etc/supervisor/conf.d/supervisor.conf
+#    tail -f
 }
 
 permission() {
